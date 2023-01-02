@@ -1,0 +1,8 @@
+<div
+  *ngIf="!alert.hide"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+  [ngStyle]="{ backgroundColor: alert.bgColor }"
+>
+  <strong>{{ alert.message }}</strong>
+</div>

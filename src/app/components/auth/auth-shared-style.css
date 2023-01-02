@@ -1,0 +1,47 @@
+form {
+  box-shadow: var(--mainBoxShadow);
+  padding: 25px;
+  border-radius: 5px;
+}
+form h3,
+form label {
+  font-weight: bold;
+}
+form label {
+  font-size: 13px;
+}
+.input-hook > div.form-group {
+  position: relative;
+  width: 100%;
+}
+.input-hook > div.form-group input {
+  text-indent: 20px;
+  border: 2px solid #ddd;
+}
+.input-hook > div.form-group > i {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  color: var(--textMainColor);
+}
+.input-hook .input-err-msg {
+  font-size: 13px;
+  color: var(--warnColor);
+  font-weight: bold;
+}
+form button[type="submit"] {
+  width: 100%;
+  background-color: var(--mainColor);
+  color: #fff;
+}
+.switch-auth a {
+  color: var(--warnColor);
+}
+.auth-res-err {
+  background-color: var(--warnColor);
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 5px;
+}

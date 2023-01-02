@@ -1,0 +1,36 @@
+<div *ngIf="cart.products.length !== 0">
+  <div class="row mt-5">
+    <div
+      *ngFor="let product of cart.products"
+      class="col-xs-12 col-sm-10 col-md-6 mb-5"
+    >
+      <div class="cart-product">
+        <img [src]="product.thumbnail" alt="" />
+        <h5>{{ product.title | slice : 0 : 10 }}</h5>
+        <span>{{ product.price }}$</span>
+        <div class="quan-btns">
+          <button (click)="onAddProduct(product.id, product.price)">
+            <i class="fa-sharp fa-solid fa-chevron-up"></i>
+          </button>
+          <span>{{ product.quantity }} <i class="fa-solid fa-times"></i></span>
+          <button (click)="onDeleteProduct(product.id)">
+            <i class="fa-sharp fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+        <span>{{ product.price * product.quantity }}$</span>
+      </div>
+    </div>
+  </div>
+  <div class="row check-out">
+    <button class="btn">
+      <i class="fa-solid fa-credit-card"></i> check out {{ cart.totalPrice }} $
+    </button>
+  </div>
+</div>
+
+<div class="empty-cart mt-5" *ngIf="cart.products.length === 0">
+  <h3>your cart is empty</h3>
+  <button class="btn">
+    <i class="fa-sharp fa-solid fa-cart-plus"></i> shopping now
+  </button>
+</div>

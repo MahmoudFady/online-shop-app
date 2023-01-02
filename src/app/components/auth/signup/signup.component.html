@@ -1,0 +1,168 @@
+<div
+  class="row mt-5 flex-column justify-content-center align-items-center auth"
+>
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+      <div class="form-group">
+        <h3>signup</h3>
+      </div>
+      <div class="form-group auth-res-err" *ngIf="signupErrMsg">
+        <p>{{ signupErrMsg }}</p>
+      </div>
+      <div class="input-hook">
+        <label for="name">user name</label>
+        <div class="form-group">
+          <i class="fa-solid fa-user"></i>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="name..."
+            formControlName="name"
+          />
+        </div>
+        <div
+          class="input-err-msg"
+          *ngIf="getFormCtrl('name')?.touched && getFormCtrl('name')?.errors"
+        >
+          <p *ngIf="(getFormCtrl('name')?.errors)!['required']">
+            name is required
+          </p>
+          <p *ngIf="(getFormCtrl('name')?.errors)!['minlength']">
+            name must be at least 5 chars
+          </p>
+        </div>
+      </div>
+      <div class="input-hook">
+        <label for="email">user email</label>
+        <div class="form-group">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="email..."
+            formControlName="email"
+          />
+        </div>
+        <div
+          class="input-err-msg"
+          *ngIf="getFormCtrl('email')?.touched && getFormCtrl('email')?.errors"
+        >
+          <p *ngIf="(getFormCtrl('email')?.errors)!['required']">
+            email is required
+          </p>
+          <p *ngIf="(getFormCtrl('email')?.errors)!['email']">
+            invalid email ex : abc@abc
+          </p>
+        </div>
+      </div>
+      <div class="input-hook">
+        <label for="phone">user phone</label>
+        <div class="form-group">
+          <i class="fa-solid fa-mobile"></i>
+          <input
+            type="tel"
+            id="phone"
+            class="form-control"
+            placeholder="phone..."
+            formControlName="phone"
+          />
+        </div>
+        <div
+          class="input-err-msg"
+          *ngIf="getFormCtrl('phone')?.touched && getFormCtrl('phone')?.errors"
+        >
+          <p *ngIf="(getFormCtrl('phone')?.errors)!['required']">
+            phone is required
+          </p>
+          <p *ngIf="(getFormCtrl('phone')?.errors)!['invalidPhoneNum']">
+            invalid phone number
+          </p>
+        </div>
+      </div>
+      <div class="input-hook">
+        <label for="">user address</label>
+        <div formGroupName="address" class="address row">
+          <div class="col-md">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="country..."
+                formControlName="country"
+              />
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="state..."
+                formControlName="state"
+              />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="city..."
+                formControlName="city"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="input-err-msg"
+          *ngIf="
+            getFormCtrl('address')?.touched && getFormCtrl('address')?.errors
+          "
+        >
+          <p *ngIf="getFormCtrl('address')?.errors">address is required</p>
+        </div>
+      </div>
+      <div class="input-hook">
+        <label for="passwod">user password</label>
+        <div class="form-group">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="passwod..."
+            formControlName="password"
+          />
+        </div>
+        <div
+          class="input-err-msg"
+          *ngIf="
+            getFormCtrl('password')?.touched && getFormCtrl('password')?.errors
+          "
+        >
+          <p *ngIf="(getFormCtrl('password')?.errors)!['required']">
+            password is required
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button
+          class="btn"
+          type="submit"
+          [disabled]="!signupForm.valid || laoding"
+        >
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          signup
+          <span *ngIf="laoding"> . . .</span>
+        </button>
+      </div>
+      <div class="form-group text-center switch-auth">
+        <p>already have account ? <a routerLink="../signin">signin now </a></p>
+      </div>
+    </form>
+  </div>
+</div>

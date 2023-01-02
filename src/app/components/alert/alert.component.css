@@ -1,0 +1,12 @@
+.alert {
+  width: 320px;
+  position: fixed;
+  bottom: 25px;
+  left: calc((100% - 320px) / 2);
+  color: #fff;
+  border: none;
+  z-index: 9999;
+}
+.alert button {
+  color: #fff !important;
+}

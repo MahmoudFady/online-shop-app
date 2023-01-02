@@ -1,0 +1,32 @@
+.row {
+  padding: 0px;
+  margin: 0px;
+  background-image: url("https://img.freepik.com/free-photo/cyber-monday-retail-sales_23-2148688493.jpg?w=1380&t=st=1672600401~exp=1672601001~hmac=3675daa5757853c919de8c62f0fd6bd2ac229637a8f023b059dbfe580fda166f");
+  width: 100%;
+  height: 450px;
+  background-size: contain;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.row .col {
+  padding: 25px;
+  padding-top: 100px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+.row .col h1 {
+  font-size: 24px;
+}
+.row .col p {
+  width: 75%;
+}
+.row .col button {
+  height: 40px;
+  width: max-content;
+  display: block;
+  background-color: var(--mainColor);
+  color: #fff;
+  border-radius: 20px;
+}

@@ -1,0 +1,74 @@
+<div
+  class="row mt-5 flex-column justify-content-center align-items-center auth"
+>
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <form #signinForm="ngForm" (ngSubmit)="onSignin(signinForm)">
+      <div class="form-group">
+        <h3>signin</h3>
+      </div>
+      <div class="form-group auth-res-err" *ngIf="signinErrMsg">
+        <p>{{ signinErrMsg }}</p>
+      </div>
+      <div class="input-hook">
+        <label for="email">user email</label>
+        <div class="form-group">
+          <i class="fa-solid fa-envelope"></i>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="email..."
+            required
+            email
+            name="email"
+            ngModel
+            #email="ngModel"
+          />
+        </div>
+        <div
+          class="form-group input-err-msg"
+          *ngIf="email.touched && email.errors"
+        >
+          <p *ngIf="email.errors['required']">email is required</p>
+          <p *ngIf="email.errors['email']">invalid email ex : abc@abc</p>
+        </div>
+      </div>
+
+      <div class="input-hook">
+        <label for="passwod">user password</label>
+        <div class="form-group">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="passwod..."
+            name="password"
+            required
+            minlength="6"
+            ngModel
+            #password="ngModel"
+          />
+        </div>
+        <div class="input-err-msg" *ngIf="password.touched && password.errors">
+          <p *ngIf="password.errors['required']">password is required</p>
+          <p *ngIf="password.errors['minlength']">
+            password must be at least 5 chars
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <button
+          class="btn"
+          type="submit"
+          [disabled]="signinForm.invalid || loading"
+        >
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          singin <span *ngIf="loading"> . . .</span>
+        </button>
+      </div>
+      <div class="form-group text-center switch-auth">
+        <p>doesn't have account ? <a routerLink="../signup">signup now </a></p>
+      </div>
+    </form>
+  </div>
+</div>

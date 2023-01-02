@@ -1,0 +1,30 @@
+<div class="product-hook">
+  <div class="header">
+    <img [src]="product.thumbnail" alt="" />
+  </div>
+  <div class="info">
+    <div class="brand">
+      <p>{{ product.brand }}</p>
+    </div>
+    <div class="title">
+      <p>{{ product.title | slice : 0 : 10 }} ...</p>
+    </div>
+    <div class="price">
+      <p>{{ product.price }} <i class="fa-solid fa-dollar"></i></p>
+    </div>
+  </div>
+  <div class="buy" *ngIf="!isProductInCart || productQuantity <= 0">
+    <button class="btn" (click)="onAddProduct()">
+      <i class="fa-sharp fa-solid fa-cart-plus"></i>
+    </button>
+  </div>
+  <div class="isProductInCart" *ngIf="isProductInCart && productQuantity > 0">
+    <button (click)="onDecrproductQuan()">
+      <i class="fa-solid fa-minus"></i>
+    </button>
+    <strong>{{ productQuantity }} items in cart</strong>
+    <button (click)="onIncPooductQuan()">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+</div>

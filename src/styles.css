@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Rubik:wght@300&family=Source+Code+Pro&display=swap");
+:root {
+  --mainColor: #146ebe;
+  --textMainColor: #495057;
+  --mainBoxShadow: 2px 2px 4px #ccc, -2px -2px 4px #ccc;
+  --warnColor: #c63100;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Open Sans";
+  font-family: "Rubik";
+  font-family: "Source Code Pro";
+  text-transform: capitalize !important;
+}
+input.ng-touched.ng-valid {
+  border-color: #080 !important;
+}
+input.ng-touched.ng-invalid {
+  border-color: var(--warnColor) !important;
+}
+a,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}

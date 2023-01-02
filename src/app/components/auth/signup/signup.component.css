@@ -1,0 +1,4 @@
+.address input {
+  text-indent: 0px !important;
+  border: 2px solid #ccc;
+}

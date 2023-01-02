@@ -1,0 +1,20 @@
+.navbar {
+  background-color: transparent !important;
+  box-shadow: 1px 1px 2px #ccc;
+}
+button.navbar-toggler {
+  border: none;
+}
+.navbar-brand {
+  color: var(--mainColor);
+}
+ul.navbar-text {
+  position: absolute;
+  right: 50px;
+  top: 0px;
+}
+ul.navbar-text li {
+  list-style: none;
+  display: inline-block;
+  margin: 0px 10px;
+}

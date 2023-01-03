@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { CartService } from './../../cart/cart.service';
-import { IProduct } from './../product.model';
+import { IProduct } from '../../shared/models/product.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -22,16 +22,24 @@ export class ProductComponent implements OnInit {
       this.cartService.getCartProductsIdAndQuan()[productIndex]?.quantity;
   }
   onIncPooductQuan() {
-    this.cartService.plusProudctQuantity(this.product.id);
+    this.cartService.increaseProductQuantity(this.product.id);
     this.productQuantity += 1;
   }
   onDecrproductQuan() {
-    this.cartService.minusProudctQuantity(this.product.id);
+    this.cartService.decreaseProductQuantity(this.product.id);
     this.productQuantity -= 1;
   }
   onAddProduct() {
-    const { id, thumbnail, title, price } = this.product;
-    this.cartService.addProduct({ id, thumbnail, title, price });
+    const { id, thumbnail, title, price, brand, discountPercentage } =
+      this.product;
+    this.cartService.pushProductToCart({
+      id,
+      thumbnail,
+      title,
+      brand,
+      price,
+      discountPercentage,
+    });
     this.isProductInCart = true;
     this.productQuantity = 1;
   }

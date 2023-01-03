@@ -1,19 +1,8 @@
-import { AlertService } from './../alert/alert.service';
 import { Subject } from 'rxjs';
 import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
-export interface ICart {
-  userId?: number;
-  totalPrice: number;
-  totalQuantity: number;
-  products: {
-    id: number;
-    thumbnail: string;
-    title: string;
-    price: number;
-    quantity: number;
-  }[];
-}
+import { AlertService } from '../shared/alert/alert.service';
+import { ICart } from '../shared/models/cart.model';
 @Injectable({ providedIn: 'root' })
 export class CartService {
   cart: ICart = {
@@ -21,7 +10,6 @@ export class CartService {
     totalPrice: 0,
     totalQuantity: 0,
   };
-  cart$ = new Subject<ICart>();
   constructor(
     private authService: AuthService,
     private alertService: AlertService
@@ -40,79 +28,68 @@ export class CartService {
       return;
     }
     this.cart = this.getSavedCart() as ICart;
-    this.cart$.next(this.cart);
+  }
+  getPriceAfterDiscount(price: number, discount: number) {
+    return Math.round(price - price * (discount / 100));
+  }
+  private increaseCartData(price: number, discount: number) {
+    this.cart.totalPrice += this.getPriceAfterDiscount(price, discount);
+    this.cart.totalQuantity += 1;
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+  }
+  private decreaseCartData(price: number, discount: number) {
+    this.cart.totalPrice -= this.getPriceAfterDiscount(price, discount);
+    this.cart.totalQuantity -= 1;
+    localStorage.setItem('cart', JSON.stringify(this.cart));
   }
   pushProductToCart(product: {
     id: number;
     thumbnail: string;
     title: string;
+    brand: string;
     price: number;
+    discountPercentage: number;
   }) {
     this.cart.products.push({
       ...product,
       quantity: 1,
     });
-    this.cart.totalPrice += product.price;
-    this.cart.totalQuantity += 1;
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.cart$.next(this.cart);
+    const { price, discountPercentage } = product;
+    this.increaseCartData(price, discountPercentage);
+    this.alertService.displayAlert('product added to cart', '#080');
   }
-  plusProudctQuantity(id: number) {
+  increaseProductQuantity(id: number) {
     const productIndex = this.cart.products.findIndex((p) => p.id === id);
     if (productIndex === -1) return;
-    const products = this.cart.products;
-    products[productIndex].quantity += 1;
-    this.cart.totalPrice += products[productIndex].price;
-    this.cart.totalQuantity += 1;
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.cart$.next(this.cart);
+    const product = this.cart.products[productIndex];
+    product.quantity += 1;
+    const { price, discountPercentage } = product;
+    this.increaseCartData(price, discountPercentage);
     this.alertService.displayAlert('one item added', '#080');
   }
-  minusProudctQuantity(id: number) {
-    const productIndex = this.cart.products.findIndex((p) => p.id === id);
+  decreaseProductQuantity(id: number) {
+    const productIndex = this.cart.products.findIndex((p) => p.id == id);
     if (productIndex === -1) return;
-    const products = this.cart.products;
-    products[productIndex].quantity -= 1;
-    this.cart.totalPrice -= products[productIndex].price;
-    this.cart.totalQuantity -= 1;
-    if (products[productIndex].quantity === 0) {
-      products.splice(productIndex, 1);
+    const product = this.cart.products[productIndex];
+    product.quantity -= 1;
+    if (product.quantity === 0) {
+      this.removeProduct(id);
+      return;
     }
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.cart$.next(this.cart);
-    this.alertService.displayAlert('one item removed', 'var(--warnColor)');
+    const { price, discountPercentage } = product;
+    this.decreaseCartData(price, discountPercentage);
+    this.alertService.displayAlert('one item removed', '#080');
   }
-  addProduct(product: {
-    id: number;
-    thumbnail: string;
-    title: string;
-    price: number;
-  }) {
-    const productIndex = this.cart.products.findIndex(
-      (p) => p.id === product.id
-    );
-    if (productIndex == -1) {
-      this.cart.products.push({ ...product, quantity: 1 });
-    } else {
-      this.cart.products[productIndex].quantity += 1;
-    }
-    this.cart.totalPrice += product.price;
-    this.cart.totalQuantity += 1;
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.cart$.next(this.cart);
-    this.alertService.displayAlert('product add to cart', '#080');
-  }
+
   removeProduct(id: number) {
     const productIndex = this.cart.products.findIndex((p) => p.id == id);
-    this.cart.products[productIndex].quantity -= 1;
-    this.cart.totalPrice -= this.cart.products[productIndex].price;
-    this.cart.totalQuantity -= 1;
-    if (this.cart.products[productIndex].quantity === 0) {
-      this.cart.products.splice(productIndex, 1);
-    }
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.cart$.next(this.cart);
-    this.alertService.displayAlert('product removed', 'var(--warnColor)');
+    const { price, discountPercentage } = this.cart.products[productIndex];
+    this.cart.products.splice(productIndex, 1);
+    this.decreaseCartData(price, discountPercentage);
+    this.alertService.displayAlert(
+      'product removed from cart',
+      'var(--warnColor)'
+    );
   }
   getCart() {
     return this.cart;
@@ -122,8 +99,5 @@ export class CartService {
       return { id: p.id, quantity: p.quantity };
     });
     return products;
-  }
-  getUpdatedCart() {
-    return this.cart$.asObservable();
   }
 }

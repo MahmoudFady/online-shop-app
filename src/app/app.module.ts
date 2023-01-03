@@ -1,3 +1,5 @@
+import { CalcPriceAfterDiscountPipe } from './components/products/product/calc-price-after-discount.pipe';
+import { TextShortenPipe } from './components/shared/text-shorten.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './components/products/products.component';
 import { BannerComponent } from './components/home/banner/banner.component';
@@ -14,11 +16,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from './components/shared/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TextShortenPipe,
+    CalcPriceAfterDiscountPipe,
     NavbarComponent,
     HomeComponent,
     BannerComponent,

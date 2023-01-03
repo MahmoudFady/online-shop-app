@@ -1,5 +1,5 @@
 import { ProductService } from './product.service';
-import { IProduct } from './product.model';
+import { IProduct } from '../shared/models/product.model';
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-products',
@@ -17,8 +17,8 @@ export class ProductsComponent {
       },
     });
   }
-  getProducts(inc: number) {
-    this.pageIndex = inc + this.pageIndex;
+  getProductByPagination(incr: number) {
+    this.pageIndex = incr + this.pageIndex;
     this.productService.getProductsByPageIndex(this.pageIndex).subscribe({
       next: (products) => {
         this.products = products;

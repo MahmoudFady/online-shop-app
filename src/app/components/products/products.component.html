@@ -11,20 +11,16 @@
     <app-product [product]="product"></app-product>
   </div>
 </div>
-<div class="row justify-content-center text-center mb-5">
-  <div class="col">
-    <button
-      class="btn btn-primary"
-      [disabled]="pageIndex == 1"
-      (click)="getProducts(-1)"
-    >
-      <i class="fa-sharp fa-solid fa-arrow-left"></i>
-      prev
-    </button>
-  </div>
-  <div class="col">
-    <button class="btn btn-primary" (click)="getProducts(1)">
-      next <i class="fa-sharp fa-solid fa-arrow-right"></i>
-    </button>
-  </div>
+<div class="row mb-5 pagination-btns-hook">
+  <button
+    class="btn btn-primary"
+    [disabled]="pageIndex == 1"
+    (click)="getProductByPagination(-1)"
+  >
+    <i class="fa-sharp fa-solid fa-chevron-left"></i>
+  </button>
+  <strong>page num {{ pageIndex }}</strong>
+  <button class="btn btn-primary" (click)="getProductByPagination(1)">
+    <i class="fa-sharp fa-solid fa-chevron-right"></i>
+  </button>
 </div>

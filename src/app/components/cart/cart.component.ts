@@ -1,4 +1,5 @@
-import { CartService, ICart } from './cart.service';
+import { ICart } from '../shared/models/cart.model';
+import { CartService } from './cart.service';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-cart',
@@ -11,15 +12,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
   }
-  onAddProduct(id: number, price: number) {
-    this.cartService.addProduct({
-      id,
-      thumbnail: '',
-      title: '',
-      price,
-    });
+  onAddProduct(id: number) {
+    this.cartService.increaseProductQuantity(id);
   }
   onDeleteProduct(id: number) {
-    this.cartService.removeProduct(id);
+    this.cartService.decreaseProductQuantity(id);
   }
 }

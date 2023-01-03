@@ -9,7 +9,7 @@
         <h5>{{ product.title | slice : 0 : 10 }}</h5>
         <span>{{ product.price }}$</span>
         <div class="quan-btns">
-          <button (click)="onAddProduct(product.id, product.price)">
+          <button (click)="onAddProduct(product.id)">
             <i class="fa-sharp fa-solid fa-chevron-up"></i>
           </button>
           <span>{{ product.quantity }} <i class="fa-solid fa-times"></i></span>

@@ -12,10 +12,4 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
   }
-  onAddProduct(id: number) {
-    this.cartService.increaseProductQuantity(id);
-  }
-  onDeleteProduct(id: number) {
-    this.cartService.decreaseProductQuantity(id);
-  }
 }

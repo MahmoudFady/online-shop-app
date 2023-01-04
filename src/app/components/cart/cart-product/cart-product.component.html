@@ -1,0 +1,44 @@
+<div class="product">
+  <div class="image">
+    <img [src]="product.thumbnail" alt="" />
+  </div>
+
+  <div class="info">
+    <div class="title">
+      <h6>
+        {{ product.title }}
+      </h6>
+      <span>{{ product.brand }}</span>
+    </div>
+    <div class="price">
+      <p>
+        <span
+          *ngIf="product.discountPercentage !== 0"
+          style="text-decoration: line-through"
+          >{{ product.price * product.quantity }}</span
+        >
+        <span
+          >{{ getProductTotalPriceAfterDiscount() }}
+          $
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="quantity">
+    <div class="">
+      <button (click)="onIncreaseProductQuantity()">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <strong>{{ product.quantity }}</strong>
+      <button (click)="onDecreaseProductQuantity()">
+        <i class="fa-solid fa-minus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="deleteProduct">
+    <button (click)="onRemoveProduct()">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+</div>

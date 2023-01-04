@@ -37,9 +37,10 @@ export class CartService {
     this.cart.totalQuantity += 1;
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
-  private decreaseCartData(price: number, discount: number) {
-    this.cart.totalPrice -= this.getPriceAfterDiscount(price, discount);
-    this.cart.totalQuantity -= 1;
+  private decreaseCartData(price: number, discount: number, quantity = 1) {
+    const minusedPrice = quantity * this.getPriceAfterDiscount(price, discount);
+    this.cart.totalPrice -= minusedPrice;
+    this.cart.totalQuantity -= quantity;
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
   pushProductToCart(product: {
@@ -83,9 +84,14 @@ export class CartService {
 
   removeProduct(id: number) {
     const productIndex = this.cart.products.findIndex((p) => p.id == id);
-    const { price, discountPercentage } = this.cart.products[productIndex];
+    const { price, discountPercentage, quantity } =
+      this.cart.products[productIndex];
     this.cart.products.splice(productIndex, 1);
-    this.decreaseCartData(price, discountPercentage);
+    this.decreaseCartData(
+      price,
+      discountPercentage,
+      quantity == 0 ? 1 : quantity
+    );
     this.alertService.displayAlert(
       'product removed from cart',
       'var(--warnColor)'

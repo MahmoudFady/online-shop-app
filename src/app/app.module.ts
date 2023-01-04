@@ -17,6 +17,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { CartEmptyComponent } from './components/cart/cart-empty/cart-empty.component';
+import { CartProductComponent } from './components/cart/cart-product/cart-product.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { AlertComponent } from './components/shared/alert/alert.component';
     SigninComponent,
     SignupComponent,
     AlertComponent,
+    CartEmptyComponent,
+    CartProductComponent
   ],
   imports: [
     BrowserModule,

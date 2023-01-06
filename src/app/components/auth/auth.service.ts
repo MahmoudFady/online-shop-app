@@ -1,33 +1,24 @@
+import { CartService } from './../cart/cart.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-export interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  phone: number;
-  address: {
-    country: string;
-    state: string;
-    city: string;
-  };
-  password: string;
-}
+import { Router } from '@angular/router';
+import { IUser } from '../shared/models/user.model';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly baseUrl = 'http://localhost:3001/';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
   isAccountDoesNotExist(email: string): Promise<Boolean> {
     const promise = new Promise<Boolean>((resolve, reject) => {
       this.http.get<IUser[]>(`${this.baseUrl}users?email=${email}`).subscribe({
         next: (response) => {
-          if (response.length == 0) {
-            resolve(true);
-          }
-          resolve(false);
+          const exist = response.length === 0 ? false : true;
+          exist ? reject('email already exist') : resolve(true);
         },
         error: (err) => {
-          reject(false);
+          reject(err.message);
         },
       });
     });
@@ -42,7 +33,11 @@ export class AuthService {
       `${this.baseUrl}users?email=${email}&&password=${password}`
     );
   }
-  getSavedUserId() {
-    return (localStorage.getItem('userId') as unknown as number) || null;
+  setupSuccessAuth(id: number) {
+    localStorage.setItem('userId', JSON.stringify(id));
+    this.router.navigate(['/user/cart']);
+  }
+  getUserIdFromLocalStorage() {
+    return localStorage.getItem('userId') || null;
   }
 }

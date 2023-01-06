@@ -1,5 +1,5 @@
 <div
-  *ngIf="cart.products.length > 0"
+  *ngIf="cart.products.length > 0; else emptyLabel"
   class="row flex-column justify-content-center align-items-center mt-5"
 >
   <div
@@ -31,3 +31,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #emptyLabel>
+  <div class="row mt-5 ml-5">
+    <app-cart-empty></app-cart-empty>
+  </div>
+</ng-template>

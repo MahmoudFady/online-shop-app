@@ -1,0 +1,7 @@
+<div *ngIf="!modal.hide" class="my-modal">
+  <div>
+    <h6>{{ modal.message }}</h6>
+    <button class="btn cancel" (click)="onClose(false)">discard</button>
+    <button class="btn submit" (click)="onClose(true)">submit</button>
+  </div>
+</div>

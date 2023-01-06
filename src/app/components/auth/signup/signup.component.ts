@@ -1,4 +1,4 @@
-import { AuthService, IUser } from './../auth.service';
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -10,23 +10,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
   laoding = false;
   signupErrMsg!: string | null;
-  signupForm!: FormGroup;
+  signupForm: FormGroup = new FormGroup({
+    id: new FormControl(Math.random()),
+    name: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    phone: new FormControl(null, [Validators.required, this.validatePhoneNum]),
+    address: new FormGroup({
+      country: new FormControl(null, Validators.required),
+      state: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
+    }),
+    password: new FormControl(null, [Validators.required]),
+  });
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      id: new FormControl(Math.random()),
-      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phone: new FormControl('', [Validators.required, this.validatePhoneNum]),
-      address: new FormGroup({
-        country: new FormControl('', Validators.required),
-        state: new FormControl('', Validators.required),
-        city: new FormControl('', Validators.required),
-      }),
-      password: new FormControl('', [Validators.required]),
-    });
-  }
+  ngOnInit(): void {}
   getFormCtrl(name: string) {
     return this.signupForm.get(name);
   }
@@ -55,6 +53,9 @@ export class SignupComponent implements OnInit {
       next: () => {
         this.signupErrMsg = null;
         this.laoding = false;
+        console.log('signup success');
+
+        this.authService.setupSuccessAuth(this.signupForm.value.id);
       },
       error: (err) => {
         this.signupErrMsg = err.message;

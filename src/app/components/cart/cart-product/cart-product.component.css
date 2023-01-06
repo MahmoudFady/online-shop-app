@@ -18,7 +18,7 @@
 }
 .info .title h6 {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
 }
 .info .title span,
 .info .price p {
@@ -50,6 +50,7 @@
 }
 .info .price p span {
   margin-right: 5px;
+  font-size: 12px;
 }
 .deleteProduct {
   align-self: flex-end;

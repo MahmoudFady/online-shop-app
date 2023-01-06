@@ -29,6 +29,9 @@ form label {
   color: var(--warnColor);
   font-weight: bold;
 }
+.input-hook .input-err-msg p {
+  font-size: 13px;
+}
 form button[type="submit"] {
   width: 100%;
   background-color: var(--mainColor);

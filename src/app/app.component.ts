@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   constructor(private cartService: CartService) {}
   ngOnInit(): void {
-    this.cartService.initialCart();
+    this.cartService.setCart();
   }
 }

@@ -1,7 +1,44 @@
 {
+  "carts": [
+    {
+      "products": [
+        {
+          "id": 1,
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "title": "iPhone 9",
+          "brand": "Apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 478,
+      "totalQuantity": 1,
+      "id": "0.3074847786360402"
+    },
+    {
+      "products": [],
+      "totalPrice": 0,
+      "totalQuantity": 0,
+      "id": "0.36202179452373984"
+    }
+  ],
+  "orders": [],
   "users": [
     {
-      "id": 0.8750568591122259,
+      "id": 0.36202179452373984,
+      "name": "mahmoud fady",
+      "email": "mahmoud1@gmail.com",
+      "phone": "01154175890",
+      "address": {
+        "country": "egypt",
+        "state": "as sharquia",
+        "city": "zagazig"
+      },
+      "password": "123456"
+    },
+    {
+      "id": 0.5974122025079045,
       "name": "mahmoud",
       "email": "test1@gmail.com",
       "phone": "01154175890",
@@ -10,12 +47,12 @@
         "state": "cairo",
         "city": "cairo"
       },
-      "password": "123"
+      "password": "123456"
     },
     {
-      "id": 0.608249133830691,
-      "name": "camowasuhi",
-      "email": "qehes@mailinator.com",
+      "id": 0.3601979774145321,
+      "name": "sowozugu",
+      "email": "byzatiryn@mailinator.com",
       "phone": "01154175890",
       "address": {
         "country": "Egypt",
@@ -25,28 +62,40 @@
       "password": "Pa$$w0rd!"
     },
     {
-      "id": 0.7580056922274347,
-      "name": "mahmoud",
-      "email": "Qehes@Mailinator.Com",
+      "id": 0.31262611361848136,
+      "name": "qokynin",
+      "email": "terevogeto@mailinator.com",
       "phone": "01154175890",
       "address": {
         "country": "Egypt",
         "state": "cairo",
         "city": "cairo"
       },
-      "password": "dkdkdkd"
+      "password": "Pa$$w0rd!"
     },
     {
-      "id": 0.5481917292128955,
-      "name": "salat",
-      "email": "admin@admin.com",
+      "id": 0.4168277001235208,
+      "name": "lewamox",
+      "email": "wuwudytace@mailinator.com",
       "phone": "01154175890",
       "address": {
         "country": "Egypt",
         "state": "cairo",
         "city": "cairo"
       },
-      "password": "dkdkd"
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": 0.3074847786360402,
+      "name": "dojyk",
+      "email": "litutefy@mailinator.com",
+      "phone": "01154175890",
+      "address": {
+        "country": "Egypt",
+        "state": "cairo",
+        "city": "cairo"
+      },
+      "password": "Pa$$w0rd!"
     }
   ],
   "products": [
@@ -1911,7 +1960,5 @@
     "automotive",
     "motorcycle",
     "lighting"
-  ],
-  "carts": [],
-  "orders": []
+  ]
 }

@@ -1,0 +1,37 @@
+.my-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+.my-modal > div {
+  background-color: #fff;
+  padding: 25px 50px;
+  text-align: left;
+  border-radius: 5px;
+}
+.my-modal > div h6 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.my-modal > div button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 13px;
+}
+.my-modal > div button.cancel {
+  background-color: #ccc;
+}
+.my-modal > div button.submit {
+  color: var(--warnColor);
+}

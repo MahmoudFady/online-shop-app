@@ -15,30 +15,17 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {}
   onSignin(f: NgForm) {
     if (f.invalid) return;
-    this.loading = true;
     const { email, password } = f.value;
-    this.authService
-      .isAccountDoesNotExist(email)
-      .then(() => {
+    this.loading = true;
+    this.authService.signin(email, password).subscribe({
+      next: (users) => {
         this.loading = false;
-        this.signinErrMsg = "account doesn't exist";
-      })
-      .catch(() => {
-        this.authService.signin(email, password).subscribe({
-          next: (users) => {
-            this.loading = false;
-            if (users.length == 0) {
-              this.signinErrMsg = 'wrong password';
-              return;
-            } else {
-              this.signinErrMsg = null;
-            }
-          },
-          error: (err) => {
-            this.signinErrMsg = err.message;
-            this.loading = false;
-          },
-        });
-      });
+        if (users.length === 0) {
+          this.signinErrMsg = 'wrong email or password';
+          return;
+        }
+        this.authService.setupSuccessAuth(users[0].id);
+      },
+    });
   }
 }
